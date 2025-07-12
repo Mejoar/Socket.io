@@ -12,7 +12,9 @@ const io = socketIo(server, {
   cors: {
     origin: CORS_ORIGIN,
     methods: ['GET', 'POST'],
+    credentials: true
   },
+  transports: ['websocket', 'polling']
 });
 
 // Middleware
@@ -268,7 +270,8 @@ io.on('connection', (socket) => {
 });
 
 // Start the server
-server.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+const listener = server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on port ${PORT}`);
+  console.log('Environment:', process.env.NODE_ENV || 'development');
 });
 

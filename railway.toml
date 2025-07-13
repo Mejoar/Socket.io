@@ -1,6 +1,12 @@
 [build]
 builder = "NIXPACKS"
 
+[build.nixpacksConfig]
+# Install all dependencies and build the client
+buildCommand = "npm install && npm run build"
+# Start the server
+startCommand = "npm start"
+
 [deploy]
 numReplicas = 1
 healthcheckPath = "/health"
